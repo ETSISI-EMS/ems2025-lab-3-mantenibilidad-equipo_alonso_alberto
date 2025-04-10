@@ -13,8 +13,8 @@ public class Localizacion {
 
 	public Localizacion() {
 		super();
-		this.lista = new LinkedList<PosicionPersona>();
-	};
+		this.lista = new LinkedList<>();
+	}
 	
 	public LinkedList<PosicionPersona> getLista() {
 		return lista;

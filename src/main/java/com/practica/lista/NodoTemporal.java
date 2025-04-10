@@ -4,7 +4,7 @@ import com.practica.genericas.FechaHora;
 
 
 /**
- * Nodo para guardar un instante de tiempo. Además guardamos una lista con las coordeandas
+ * Nodo para guardar un instante de tiempo. Además, guardamos una lista con las coordeandas
  * y las personas (solo número) que en ese instante están en una coordeanda en concreto  
  *
  */

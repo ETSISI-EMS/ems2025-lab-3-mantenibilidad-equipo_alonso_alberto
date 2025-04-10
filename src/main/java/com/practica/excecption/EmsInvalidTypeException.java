@@ -7,10 +7,5 @@ public class EmsInvalidTypeException extends Exception{
 		super("TIPO DE ENTRADA NO VALIDA!");
 		// TODO Auto-generated constructor stub
 	}
-	
-	public EmsInvalidTypeException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
-	}
-	
+
 }

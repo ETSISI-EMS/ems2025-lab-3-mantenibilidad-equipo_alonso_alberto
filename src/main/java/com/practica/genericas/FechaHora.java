@@ -1,13 +1,13 @@
 package com.practica.genericas;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Locale;
 
 public class FechaHora implements Comparable<FechaHora>{
-	public class Fecha {
-		private int dia, mes, anio;
+	public static class Fecha {
+		private final int dia;
+        private final int mes;
+        private final int anio;
 		 
 		public Fecha(int dia, int mes, int anio) {
 			super();
@@ -20,38 +20,26 @@ public class FechaHora implements Comparable<FechaHora>{
 			return dia;
 		}
 
-		public void setDia(int dia) {
-			this.dia = dia;
-		}
-
 		public int getMes() {
 			return mes;
-		}
-
-		public void setMes(int mes) {
-			this.mes = mes;
 		}
 
 		public int getAnio() {
 			return anio;
 		}
 
-		public void setAnio(int anio) {
-			this.anio = anio;
-		}
-
 		@Override
 		public String toString() {
-			String cadena = String.format("%2d/%02d/%4d",dia,mes,anio);
-			return cadena;
+            return String.format("%2d/%02d/%4d",dia,mes,anio);
 		}
 		
 		
 
 	}
 
-	public class Hora {
-		private int hora, minuto;
+	public static class Hora {
+		private final int hora;
+        private final int minuto;
 
 		public Hora(int hora, int minuto) {
 			super();
@@ -63,16 +51,8 @@ public class FechaHora implements Comparable<FechaHora>{
 			return hora;
 		}
 
-		public void setHora(int hora) {
-			this.hora = hora;
-		}
-
 		public int getMinuto() {
 			return minuto;
-		}
-
-		public void setMinuto(int minuto) {
-			this.minuto = minuto;
 		}
 
 		@Override
@@ -85,12 +65,6 @@ public class FechaHora implements Comparable<FechaHora>{
 
 	Fecha fecha;
 	Hora hora;
-	
-	public FechaHora(Fecha fecha, Hora hora) {
-		super();
-		this.fecha = fecha;
-		this.hora = hora;
-	}
 
 	public FechaHora(int dia, int mes, int anio, int hora, int minuto) {
 		this.fecha = new Fecha(dia, mes, anio);
@@ -101,16 +75,8 @@ public class FechaHora implements Comparable<FechaHora>{
 		return fecha;
 	}
 
-	public void setFecha(Fecha fecha) {
-		this.fecha = fecha;
-	}
-
 	public Hora getHora() {
 		return hora;
-	}
-
-	public void setHora(Hora hora) {
-		this.hora = hora;
 	}
 
 	@Override

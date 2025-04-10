@@ -7,8 +7,4 @@ public class EmsDuplicateLocationException extends Exception{
 		// TODO Auto-generated constructor stub
 	}
 
-	public EmsDuplicateLocationException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
-	}
 }

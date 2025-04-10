@@ -1,29 +1,19 @@
 package com.practica.lista;
 
-import java.util.ArrayList;
-
 import com.practica.genericas.Coordenada;
 
 /**
- * Nodo para la lista de coordenadas. En el guardamos cuántas personas  están
- * en una coordenada  en un momento temporal. 
+ * Nodo para la lista de coordenadas. En él guardamos cuántas personas están
+ * en una coordenada en un momento temporal.
  * También guardaremos la lista de personas que están en esa coordenada en un 
  * momento en concreto
  */
 public class NodoPosicion {
-	private Coordenada coordenada;	
+	private final Coordenada coordenada;
 	private int numPersonas;
 	private NodoPosicion siguiente;
-	
-	
-	public NodoPosicion() {
-		super();
-		siguiente = null;
-	}
 
-	
-	
-	
+
 	public NodoPosicion(Coordenada coordenada,  int numPersonas, NodoPosicion siguiente) {
 		super();
 		this.coordenada = coordenada;		
@@ -36,10 +26,6 @@ public class NodoPosicion {
 
 	public Coordenada getCoordenada() {
 		return coordenada;
-	}
-
-	public void setCoordenada(Coordenada coordenada) {
-		this.coordenada = coordenada;
 	}
 
 	public int getNumPersonas() {

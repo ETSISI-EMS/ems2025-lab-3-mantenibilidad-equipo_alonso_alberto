@@ -7,8 +7,4 @@ public class EmsDuplicatePersonException extends Exception{
 		// TODO Auto-generated constructor stub
 	}
 
-	public EmsDuplicatePersonException(String message) {
-		super(message);
-		// TODO Auto-generated constructor stub
-	}
 }
