@@ -36,10 +36,6 @@ public class ContactosCovid {
 		return poblacion;
 	}
 
-	public void setPoblacion(Poblacion poblacion) {
-		this.poblacion = poblacion;
-	}
-
 	public Localizacion getLocalizacion() {
 		return localizacion;
 	}
@@ -52,10 +48,6 @@ public class ContactosCovid {
 
 	public ListaContactos getListaContactos() {
 		return listaContactos;
-	}
-
-	public void setListaContactos(ListaContactos listaContactos) {
-		this.listaContactos = listaContactos;
 	}
 
 	public void loadData(String data, boolean reset) throws EmsInvalidTypeException, EmsInvalidNumberOfDataException,
@@ -90,22 +82,19 @@ public class ContactosCovid {
 	}
 
 	public void loadDataFile(String fichero, boolean reset) {
-		File archivo = null;
-		FileReader fr = null;
-		BufferedReader br = null;
-		String datas[] = null, data = null;
-		loadDataFile(fichero, reset, archivo, fr, br, datas, data);
+        FileReader fr = null;
+        loadDataFile(fichero, reset, null);
 		
 	}
 
 	@SuppressWarnings("resource")
-	public void loadDataFile(String fichero, boolean reset, File archivo, FileReader fr, BufferedReader br, String datas[], String data ) {
+	public void loadDataFile(String fichero, boolean reset, FileReader fr) {
 		try {
 			// Apertura del fichero y creacion de BufferedReader para poder
 			// hacer una lectura comoda (disponer del metodo readLine()).
-			archivo = new File(fichero);
+			File archivo = new File(fichero);
 			fr = new FileReader(archivo);
-			br = new BufferedReader(fr);
+			BufferedReader br = new BufferedReader(fr);
 			if (reset) {
 				this.poblacion = new Poblacion();
 				this.localizacion = new Localizacion();
@@ -116,8 +105,9 @@ public class ContactosCovid {
 			 * tiene el tipo PERSONA o LOCALIZACION y cargo la línea de datos en la 
 			 * lista correspondiente. Sino viene ninguno de esos tipos lanzo una excepción
 			 */
+			String data;
 			while ((data = br.readLine()) != null) {
-				datas = dividirEntrada(data.trim());
+				String[] datas = dividirEntrada(data.trim());
 				for (String linea : datas) {
 					String datos[] = this.dividirLineaData(linea);
 					if (!datos[0].equals("PERSONA") && !datos[0].equals("LOCALIZACION")) {
@@ -195,31 +185,26 @@ public class ContactosCovid {
 			return lista;
 	}
 
-	public boolean delPersona(String documento) throws EmsPersonNotFoundException {
+	public void delPersona(String documento) throws EmsPersonNotFoundException {
 		int cont = 0, pos = -1;
-		Iterator<Persona> it = this.poblacion.getLista().iterator();
-		while (it.hasNext()) {
-			Persona persona = it.next();
-			if (persona.getDocumento().equals(documento)) {
-				pos = cont;
-			}
-			cont++;
-		}
+        for (Persona persona : this.poblacion.getLista()) {
+            if (persona.getDocumento().equals(documento)) {
+                pos = cont;
+            }
+            cont++;
+        }
 		if (pos == -1) {
 			throw new EmsPersonNotFoundException();
 		}
 		this.poblacion.getLista().remove(pos);
-		return false;
 	}
 
 	private String[] dividirEntrada(String input) {
-		String cadenas[] = input.split("\\n");
-		return cadenas;
+        return input.split("\\n");
 	}
 
 	private String[] dividirLineaData(String data) {
-		String cadenas[] = data.split("\\;");
-		return cadenas;
+        return data.split("\\;");
 	}
 
 	private Persona crearPersona(String[] data) {
@@ -268,7 +253,8 @@ public class ContactosCovid {
 				break;
 			case 3:
 				hora = data[i];
-				posicionPersona.setFechaPosicion(parsearFecha(fecha, hora));
+                assert fecha != null;
+                posicionPersona.setFechaPosicion(parsearFecha(fecha, hora));
 				break;
 			case 4:
 				latitud = Float.parseFloat(s);
@@ -283,26 +269,34 @@ public class ContactosCovid {
 	}
 	
 	private FechaHora parsearFecha (String fecha) {
+		return getFechaHora(fecha);
+	}
+
+	// replace lines 274 to 276
+	private FechaHora getFechaHora(String fecha) {
 		int dia, mes, anio;
-		String[] valores = fecha.split("\\/");
+		String[] valores = fecha.split("/");
 		dia = Integer.parseInt(valores[0]);
 		mes = Integer.parseInt(valores[1]);
 		anio = Integer.parseInt(valores[2]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, 0, 0);
-		return fechaHora;
+		return new FechaHora(dia, mes, anio, 0, 0);
 	}
-	
+
 	private FechaHora parsearFecha (String fecha, String hora) {
 		int dia, mes, anio;
-		String[] valores = fecha.split("\\/");
+		String[] valores = fecha.split("/");
 		dia = Integer.parseInt(valores[0]);
 		mes = Integer.parseInt(valores[1]);
 		anio = Integer.parseInt(valores[2]);
+		return getFechaHora(hora, dia, mes, anio);
+	}
+
+	static FechaHora getFechaHora(String hora, int dia, int mes, int anio) {
+		String[] valores;
 		int minuto, segundo;
-		valores = hora.split("\\:");
+		valores = hora.split(":");
 		minuto = Integer.parseInt(valores[0]);
 		segundo = Integer.parseInt(valores[1]);
-		FechaHora fechaHora = new FechaHora(dia, mes, anio, minuto, segundo);
-		return fechaHora;
+        return new FechaHora(dia, mes, anio, minuto, segundo);
 	}
 }
