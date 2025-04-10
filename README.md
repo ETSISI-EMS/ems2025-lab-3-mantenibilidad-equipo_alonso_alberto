@@ -1,4 +1,4 @@
-:point_right: [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ETSISI-EMS_ems2025-lab-3-mantenibilidad-equipo_alonso_alberto&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ETSISI-EMS_ems2025-lab-3-mantenibilidad-equipo_alonso_alberto)
+:point_right: [![Quality Gate Status](http://c1.etsisi.upm.es:8888/api/project_badges/measure?project=ETSISI-EMS_ems2025-lab-3-mantenibilidad-equipo_alonso_alberto_d6a4520a-95ce-4365-bb26-36d693b9e708&metric=alert_status&token=sqb_2efbd9804ee08e5c6ee51289ec7c75e65ecb62a8)](http://c1.etsisi.upm.es:8888/dashboard?id=ETSISI-EMS_ems2025-lab-3-mantenibilidad-equipo_alonso_alberto_d6a4520a-95ce-4365-bb26-36d693b9e708)
 
 # EMS-lab3 Maintainability
 
