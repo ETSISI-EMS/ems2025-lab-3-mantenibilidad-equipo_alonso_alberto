@@ -65,18 +65,10 @@ public class ContactosCovid {
 	public void loadDataFile(String fichero, boolean reset) {
 	    String[] datas;
 	    String data;
-	    File archivo = new File(fichero);
-	    FileReader fr = null;
-	    BufferedReader br = null;
-
-	    try {
-	        fr = new FileReader(archivo);
-	        br = new BufferedReader(fr);
+	    try(BufferedReader br = new BufferedReader(new FileReader(fichero))) {
 
 	        if (reset) {
-	            this.poblacion = new Poblacion();
-	            this.localizacion = new Localizacion();
-	            this.listaContactos = new ListaContactos();
+				resetData();
 	        }
 
 	        while ((data = br.readLine()) != null) {
@@ -88,18 +80,13 @@ public class ContactosCovid {
 	        }
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	    } finally {
-	        try {
-	            if (br != null) {
-	                br.close();
-	            }
-	            if (fr != null) {
-	                fr.close();
-	            }
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
 	    }
+	}
+
+	private void resetData() {
+		this.poblacion = new Poblacion();
+		this.localizacion = new Localizacion();
+		this.listaContactos = new ListaContactos();
 	}
 
 	private void verifyData(String[] datos) throws EmsInvalidTypeException, EmsInvalidNumberOfDataException, EmsDuplicatePersonException, EmsDuplicateLocationException {
