@@ -85,12 +85,7 @@ public class FechaHora implements Comparable<FechaHora>{
 
 	Fecha fecha;
 	Hora hora;
-	
-	public FechaHora(Fecha fecha, Hora hora) {
-		super();
-		this.fecha = fecha;
-		this.hora = hora;
-	}
+
 
 	public FechaHora(int dia, int mes, int anio, int hora, int minuto) {
 		this.fecha = new Fecha(dia, mes, anio);
