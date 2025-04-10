@@ -12,8 +12,6 @@ import com.practica.excecption.EmsDuplicateLocationException;
 import com.practica.excecption.EmsDuplicatePersonException;
 import com.practica.excecption.EmsInvalidNumberOfDataException;
 import com.practica.excecption.EmsInvalidTypeException;
-import com.practica.excecption.EmsLocalizationNotFoundException;
-import com.practica.excecption.EmsPersonNotFoundException;
 import com.practica.genericas.FechaHora;
 
 public class Test_3 {
