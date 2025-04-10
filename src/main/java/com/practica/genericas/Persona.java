@@ -9,17 +9,6 @@ public class Persona {
 
 	}
 
-	public Persona(String nombre, String apellidos, String documento, String email, String direccion,
-			FechaHora fechaNacimiento) {
-		super();
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.documento = documento;
-		this.email = email;
-		this.direccion = direccion;
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -89,9 +78,9 @@ public class Persona {
         // Direccion y código postal
 		cadena += String.format("%s,%s;", getDireccion(), getCp());
         // Fecha de nacimiento
-		cadena+=String.format("%02d/%02d/%04d\n", fecha.getFecha().getDia(), 
-        		fecha.getFecha().getMes(), 
-        		fecha.getFecha().getAnio());
+		cadena+=String.format("%02d/%02d/%04d\n", fecha.getFecha().dia(),
+        		fecha.getFecha().mes(),
+        		fecha.getFecha().anio());
 
 		return cadena;
 	}

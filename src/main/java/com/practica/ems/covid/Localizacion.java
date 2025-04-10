@@ -49,13 +49,13 @@ public class Localizacion {
             cadena.append(String.format("%s;", pp.getDocumento()));
             FechaHora fecha = pp.getFechaPosicion();
             cadena.append(String.format("%02d/%02d/%04d;%02d:%02d;",
-                    fecha.getFecha().getDia(),
-                    fecha.getFecha().getMes(),
-                    fecha.getFecha().getAnio(),
-                    fecha.getHora().getHora(),
-                    fecha.getHora().getMinuto()));
-            cadena.append(String.format("%.4f;%.4f\n", pp.getCoordenada().getLatitud(),
-                    pp.getCoordenada().getLongitud()));
+                    fecha.getFecha().dia(),
+                    fecha.getFecha().mes(),
+                    fecha.getFecha().anio(),
+                    fecha.getHora().hora(),
+                    fecha.getHora().minuto()));
+            cadena.append(String.format("%.4f;%.4f\n", pp.getCoordenada().latitud(),
+                    pp.getCoordenada().longitud()));
         }
 		
 		return cadena.toString();

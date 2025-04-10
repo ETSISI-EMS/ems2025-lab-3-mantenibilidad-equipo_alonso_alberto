@@ -29,13 +29,13 @@ public class PosicionPersona {
         cadena += String.format("%s;", getDocumento());
         FechaHora fecha = getFechaPosicion();        
         cadena+=String.format("%02d/%02d/%04d;%02d:%02d;", 
-	        		fecha.getFecha().getDia(), 
-	        		fecha.getFecha().getMes(), 
-	        		fecha.getFecha().getAnio(),
-	        		fecha.getHora().getHora(),
-	        		fecha.getHora().getMinuto());
-        cadena+=String.format("%.4f;%.4f\n", getCoordenada().getLatitud(), 
-	        		getCoordenada().getLongitud());
+	        		fecha.getFecha().dia(),
+	        		fecha.getFecha().mes(),
+	        		fecha.getFecha().anio(),
+	        		fecha.getHora().hora(),
+	        		fecha.getHora().minuto());
+        cadena+=String.format("%.4f;%.4f\n", getCoordenada().latitud(),
+	        		getCoordenada().longitud());
 	
 		return cadena;
 	}

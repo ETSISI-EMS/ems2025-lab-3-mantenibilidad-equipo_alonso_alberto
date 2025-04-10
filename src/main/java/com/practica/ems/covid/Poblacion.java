@@ -54,9 +54,9 @@ public class Poblacion {
             // Direccion y código postal
             cadena.append(String.format("%s,%s;", persona.getDireccion(), persona.getCp()));
             // Fecha de nacimiento
-            cadena.append(String.format("%02d/%02d/%04d\n", fecha.getFecha().getDia(),
-                    fecha.getFecha().getMes(),
-                    fecha.getFecha().getAnio()));
+            cadena.append(String.format("%02d/%02d/%04d\n", fecha.getFecha().dia(),
+                    fecha.getFecha().mes(),
+                    fecha.getFecha().anio()));
         }
 		return cadena.toString();
 	}

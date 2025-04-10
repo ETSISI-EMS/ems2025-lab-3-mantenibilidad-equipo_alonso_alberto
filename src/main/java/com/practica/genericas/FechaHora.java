@@ -4,62 +4,25 @@ package com.practica.genericas;
 import java.time.LocalDateTime;
 
 public class FechaHora implements Comparable<FechaHora>{
-	public static class Fecha {
-		private final int dia;
-        private final int mes;
-        private final int anio;
-		 
-		public Fecha(int dia, int mes, int anio) {
-			super();
-			this.dia = dia;
-			this.mes = mes;
-			this.anio = anio;
-		}
+	public record Fecha(int dia, int mes, int anio) {
 
-		public int getDia() {
-			return dia;
-		}
-
-		public int getMes() {
-			return mes;
-		}
-
-		public int getAnio() {
-			return anio;
-		}
 
 		@Override
-		public String toString() {
-            return String.format("%2d/%02d/%4d",dia,mes,anio);
-		}
-		
-		
+			public String toString() {
+			return String.format("%2d/%02d/%4d", dia, mes, anio);
+			}
+
 
 	}
 
-	public static class Hora {
-		private final int hora;
-        private final int minuto;
+	public record Hora(int hora, int minuto) {
 
-		public Hora(int hora, int minuto) {
-			super();
-			this.hora = hora;
-			this.minuto = minuto;
-		}
-
-		public int getHora() {
-			return hora;
-		}
-
-		public int getMinuto() {
-			return minuto;
-		}
 
 		@Override
-		public String toString() {
-			return String.format("%02d:%02d", hora,minuto);
-		}
-		
+			public String toString() {
+				return String.format("%02d:%02d", hora, minuto);
+			}
+
 
 	}
 
@@ -97,18 +60,18 @@ public class FechaHora implements Comparable<FechaHora>{
 		if (getClass() != obj.getClass())
 			return false;
 		FechaHora fecha = (FechaHora) obj;
-		return getFecha().getDia() == fecha.getFecha().getDia() && getFecha().getMes() == fecha.getFecha().getMes()
-				&& getFecha().getAnio() == fecha.getFecha().getAnio()
-				&& getHora().getHora() == fecha.getHora().getHora()
-				&& getHora().getMinuto() == fecha.getHora().getMinuto();
+		return getFecha().dia() == fecha.getFecha().dia() && getFecha().mes() == fecha.getFecha().mes()
+				&& getFecha().anio() == fecha.getFecha().anio()
+				&& getHora().hora() == fecha.getHora().hora()
+				&& getHora().minuto() == fecha.getHora().minuto();
 	}
 
 	@Override
 	public int compareTo(FechaHora o) {
-		LocalDateTime dateTime1= LocalDateTime.of(this.getFecha().getAnio(), this.getFecha().getMes(), this.getFecha().getDia(), 
-				this.getHora().getHora(), this.getHora().getMinuto());
-		LocalDateTime dateTime2= LocalDateTime.of(o.getFecha().getAnio(), o.getFecha().getMes(), o.getFecha().getDia(), 
-				o.getHora().getHora(), o.getHora().getMinuto());
+		LocalDateTime dateTime1= LocalDateTime.of(this.getFecha().anio(), this.getFecha().mes(), this.getFecha().dia(),
+				this.getHora().hora(), this.getHora().minuto());
+		LocalDateTime dateTime2= LocalDateTime.of(o.getFecha().anio(), o.getFecha().mes(), o.getFecha().dia(),
+				o.getHora().hora(), o.getHora().minuto());
 		
 		return dateTime1.compareTo(dateTime2);
 	}
