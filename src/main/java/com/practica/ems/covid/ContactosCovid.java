@@ -5,7 +5,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.practica.excecption.EmsDuplicateLocationException;
@@ -58,17 +57,15 @@ public class ContactosCovid {
 			this.localizacion = new Localizacion();
 			this.listaContactos = new ListaContactos();
 		}
-		String datas[] = dividirEntrada(data);
+		String[] datas = dividirEntrada(data);
 		for (String linea : datas) {
-			String datos[] = this.dividirLineaData(linea);
+			String[] datos = this.dividirLineaData(linea);
 			esTipoValido(datos);
 		}
 	}
 
 	public void loadDataFile(String fichero, boolean reset) {
-        FileReader fr = null;
         loadDataFile(fichero, reset, null);
-		
 	}
 
 	@SuppressWarnings("resource")
@@ -83,13 +80,8 @@ public class ContactosCovid {
 				this.poblacion = new Poblacion();
 				this.localizacion = new Localizacion();
 				this.listaContactos = new ListaContactos();
-			} 
-			/**
-			 * Lectura del fichero	línea a línea. Compruebo que cada línea 
-			 * tiene el tipo PERSONA o LOCALIZACION y cargo la línea de datos en la 
-			 * lista correspondiente. Sino viene ninguno de esos tipos lanzo una excepción
-			 */
-			String data;
+			}
+            String data;
 			while ((data = br.readLine()) != null) {
 				String[] datas = dividirEntrada(data.trim());
 				for (String linea : datas) {
@@ -159,7 +151,7 @@ public class ContactosCovid {
 
 	public List<PosicionPersona> localizacionPersona(String documento) throws EmsPersonNotFoundException {
 		int cont = 0;
-		List<PosicionPersona> lista = new ArrayList<PosicionPersona>();
+		List<PosicionPersona> lista = new ArrayList<>();
         for (PosicionPersona pp : this.localizacion.getLista()) {
             if (pp.getDocumento().equals(documento)) {
                 cont++;
@@ -191,7 +183,7 @@ public class ContactosCovid {
 	}
 
 	private String[] dividirLineaData(String data) {
-        return data.split("\\;");
+        return data.split(";");
 	}
 
 	private Persona crearPersona(String[] data) {
