@@ -2,7 +2,6 @@ package com.practica.ems.covid;
 
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +131,7 @@ public class ContactosCovid {
 
 	public List<PosicionPersona> localizacionPersona(String documento) throws EmsPersonNotFoundException {
 		int cont = 0;
-		List<PosicionPersona> lista = new ArrayList<PosicionPersona>();
+		List<PosicionPersona> lista = new ArrayList<>();
         for (PosicionPersona pp : this.localizacion.getLista()) {
             if (pp.getDocumento().equals(documento)) {
                 cont++;
@@ -167,65 +166,24 @@ public class ContactosCovid {
         return data.split(";");
 	}
 
-	private Persona crearPersona(String[] data) {
-		Persona persona = new Persona();
-		for (int i = 1; i < Constantes.MAX_DATOS_PERSONA; i++) {
-			String s = data[i];
-			switch (i) {
-			case 1:
-				persona.setDocumento(s);
-				break;
-			case 2:
-				persona.setNombre(s);
-				break;
-			case 3:
-				persona.setApellidos(s);
-				break;
-			case 4:
-				persona.setEmail(s);
-				break;
-			case 5:
-				persona.setDireccion(s);
-				break;
-			case 6:
-				persona.setCp(s);
-				break;
-			case 7:
-				persona.setFechaNacimiento(parsearFecha(s));
-				break;
-			}
-		}
+	/*private Persona crearPersona(String[] data) {
+	    Persona persona = new Persona();
+		persona.setDocumento(data[0]);
+		persona.setNombre(data[1]);
+		persona.setApellidos(data[2]);
+		persona.setEmail(data[3]);
+		persona.setDireccion(data[4]);
+		persona.setCp(data[5]);
+		persona.setFechaNacimiento(parsearFecha(data[6]));
 		return persona;
+	}*/
+
+	private Persona crearPersona(String[] datos) {
+		return new Persona(datos[0], datos[1], datos[2], datos[3], datos[4], parsearFecha(datos[6]));
 	}
 
 	private PosicionPersona crearPosicionPersona(String[] data) {
-		PosicionPersona posicionPersona = new PosicionPersona();
-		String fecha = null, hora;
-		float latitud = 0, longitud;
-		for (int i = 1; i < Constantes.MAX_DATOS_LOCALIZACION; i++) {
-			String s = data[i];
-			switch (i) {
-			case 1:
-				posicionPersona.setDocumento(s);
-				break;
-			case 2:
-				fecha = data[i];
-				break;
-			case 3:
-				hora = data[i];
-                assert fecha != null;
-                posicionPersona.setFechaPosicion(parsearFecha(fecha, hora));
-				break;
-			case 4:
-				latitud = Float.parseFloat(s);
-				break;
-			case 5:
-				longitud = Float.parseFloat(s);
-				posicionPersona.setCoordenada(new Coordenada(latitud, longitud));
-				break;
-			}
-		}
-		return posicionPersona;
+        return new PosicionPersona(data[1], parsearFecha(data[2], data[3]), new Coordenada(Float.parseFloat(data[4]), Float.parseFloat(data[5])));
 	}
 	
 	private FechaHora parsearFecha(String fecha) {
