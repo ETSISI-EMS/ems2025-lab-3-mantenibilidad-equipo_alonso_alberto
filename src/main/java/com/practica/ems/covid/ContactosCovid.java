@@ -184,45 +184,40 @@ public class ContactosCovid {
 
 	private Persona crearPersona(String[] data) {
 		Persona persona = new Persona();
-		persona.setDocumento(data[1]);
-		persona.setNombre(data[2]);
-		persona.setApellidos(data[3]);
-		persona.setEmail(data[4]);
-		persona.setDireccion(data[5]);
-		persona.setCp(data[6]);
-		if(data[7] != null) {
-			persona.setFechaNacimiento(parsearFecha(data[7]));
+		if (data.length == Constantes.MAX_DATOS_PERSONA) {
+			persona.setDocumento(data[1]);
+			persona.setNombre(data[2]);
+			persona.setApellidos(data[3]);
+			persona.setEmail(data[4]);
+			persona.setDireccion(data[5]);
+			persona.setCp(data[6]);
+			if (data[7] != null) {
+				persona.setFechaNacimiento(parsearFecha(data[7]));
+			}
 		}
 		return persona;
 	}
 
 	private PosicionPersona crearPosicionPersona(String[] data) {
 		PosicionPersona posicionPersona = new PosicionPersona();
-		String fecha = null, hora;
-		float latitud = 0, longitud;
-		for (int i = 1; i < Constantes.MAX_DATOS_LOCALIZACION; i++) {
-			String s = data[i];
-			switch (i) {
-			case 1:
-				posicionPersona.setDocumento(s);
-				break;
-			case 2:
-				fecha = data[i];
-				break;
-			case 3:
-				hora = data[i];
-                assert fecha != null;
-                posicionPersona.setFechaPosicion(parsearFecha(fecha, hora));
-				break;
-			case 4:
-				latitud = Float.parseFloat(s);
-				break;
-			case 5:
-				longitud = Float.parseFloat(s);
-				posicionPersona.setCoordenada(new Coordenada(latitud, longitud));
-				break;
+		if (data.length == 6) {
+			String documento = data[1];
+			posicionPersona.setDocumento(documento);
+
+			String fecha = data[2];
+			String hora = data[3];
+
+			if (fecha != null && hora != null) {
+				posicionPersona.setFechaPosicion(parsearFecha(fecha, hora));
 			}
+
+			float latitud = Float.parseFloat(data[4]);
+			float longitud = Float.parseFloat(data[5]);
+
+			posicionPersona.setCoordenada(new Coordenada(latitud, longitud));
+
 		}
+
 		return posicionPersona;
 	}
 	
