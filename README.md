@@ -1,4 +1,4 @@
-:point_right: PUT YOUR CI BADGE HERE
+:point_right: [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ETSISI-EMS_ems2025-lab-3-mantenibilidad-equipo_alonso_alberto&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ETSISI-EMS_ems2025-lab-3-mantenibilidad-equipo_alonso_alberto)
 
 # EMS-lab3 Maintainability
 
