@@ -92,20 +92,16 @@ public class ListaContactos {
 			return 0;
 		NodoTemporal aux = lista;
 		int cont = 0;
-		int a;
-		cont = 0;
-		while(aux!=null) {
+        while(aux!=null) {
 			if(aux.getFecha().compareTo(inicio)>=0 && aux.getFecha().compareTo(fin)<=0) {
 				NodoPosicion nodo = aux.getListaCoordenadas();
 				while(nodo!=null) {
 					cont = cont + nodo.getNumPersonas();
 					nodo = nodo.getSiguiente();
-				}				
-				aux = aux.getSiguiente();
-			}else {
-				aux=aux.getSiguiente();
-			}
-		}
+				}
+            }
+            aux = aux.getSiguiente();
+        }
 		return cont;
 	}
 	
@@ -116,20 +112,16 @@ public class ListaContactos {
 			return 0;
 		NodoTemporal aux = lista;
 		int cont = 0;
-		int a;
-		cont = 0;
-		while(aux!=null) {
+        while(aux!=null) {
 			if(aux.getFecha().compareTo(inicio)>=0 && aux.getFecha().compareTo(fin)<=0) {
 				NodoPosicion nodo = aux.getListaCoordenadas();
 				while(nodo!=null) {
 					cont = cont + 1;
 					nodo = nodo.getSiguiente();
-				}				
-				aux = aux.getSiguiente();
-			}else {
-				aux=aux.getSiguiente();
-			}
-		}
+				}
+            }
+            aux = aux.getSiguiente();
+        }
 		return cont;
 	}
 	
@@ -137,18 +129,17 @@ public class ListaContactos {
 	
 	@Override
 	public String toString() {
-		String cadena="";
-		int a,cont;
-		cont=0;
+		StringBuilder cadena= new StringBuilder();
+		int cont;
 		NodoTemporal aux = lista;
 		for(cont=1; cont<size; cont++) {
-			cadena += aux.getFecha().getFecha().toString();
-			cadena += ";" +  aux.getFecha().getHora().toString() + " ";
+			cadena.append(aux.getFecha().getFecha().toString());
+			cadena.append(";").append(aux.getFecha().getHora().toString()).append(" ");
 			aux=aux.getSiguiente();
 		}
-		cadena += aux.getFecha().getFecha().toString();
-		cadena += ";" +  aux.getFecha().getHora().toString();
-		return cadena;
+		cadena.append(aux.getFecha().getFecha().toString());
+		cadena.append(";").append(aux.getFecha().getHora().toString());
+		return cadena.toString();
 	}
 	
 	
