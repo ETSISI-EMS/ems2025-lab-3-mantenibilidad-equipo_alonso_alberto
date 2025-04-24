@@ -66,8 +66,8 @@ public class ContactosCovid {
 	@SuppressWarnings("resource")
 	public void loadDataFile(String fichero, boolean reset, FileReader fr) {
 		try {
-			// Apertura del fichero y creacion de BufferedReader para poder
-			// hacer una lectura comoda (disponer del metodo readLine()).
+			// Apertura del fichero y creación de BufferedReader para poder
+			// hacer una lectura cómoda (disponer del metodo readLine()).
 			File archivo = new File(fichero);
 			fr = new FileReader(archivo);
 			BufferedReader br = new BufferedReader(fr);
@@ -91,7 +91,7 @@ public class ContactosCovid {
 		} finally {
 			// En el finally cerramos el fichero, para asegurarnos
 			// que se cierra tanto si todo va bien como si salta
-			// una excepcion.
+			// una excepción.
 			try {
 				if (null != fr) {
 					fr.close();
