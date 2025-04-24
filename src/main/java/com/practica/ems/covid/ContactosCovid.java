@@ -2,8 +2,10 @@ package com.practica.ems.covid;
 
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.practica.excecption.EmsDuplicateLocationException;
@@ -41,6 +43,8 @@ public class ContactosCovid {
 	public void setLocalizacion(Localizacion localizacion) {
 		this.localizacion = localizacion;
 	}
+	
+	
 
 	public ListaContactos getListaContactos() {
 		return listaContactos;
@@ -56,8 +60,8 @@ public class ContactosCovid {
 		}
 		String[] datas = dividirEntrada(data);
 		for (String linea : datas) {
-			String[] datos = this.dividirLineaData(linea);
-			verifyData(datos);
+			String datos[] = this.dividirLineaData(linea);
+			esTipoValido(datos);
 		}
 	}
 
@@ -74,7 +78,7 @@ public class ContactosCovid {
 	            datas = dividirEntrada(data.trim());
 	            for (String linea : datas) {
 	                String[] datos = this.dividirLineaData(linea);
-					verifyData(datos);
+					esTipoValido(datos);
 				}
 	        }
 	    } catch (Exception e) {
@@ -88,7 +92,7 @@ public class ContactosCovid {
 		this.listaContactos = new ListaContactos();
 	}
 
-	private void verifyData(String[] datos) throws EmsInvalidTypeException, EmsInvalidNumberOfDataException, EmsDuplicatePersonException, EmsDuplicateLocationException {
+	private void esTipoValido(String[] datos) throws EmsInvalidTypeException, EmsInvalidNumberOfDataException, EmsDuplicatePersonException, EmsDuplicateLocationException {
 		if (!datos[0].equals("PERSONA") && !datos[0].equals("LOCALIZACION")) {
 			throw new EmsInvalidTypeException();
 		}
@@ -100,7 +104,8 @@ public class ContactosCovid {
 		}
 		if (datos[0].equals("LOCALIZACION")) {
 			if (datos.length != Constantes.MAX_DATOS_LOCALIZACION) {
-				throw new EmsInvalidNumberOfDataException("El número de datos para LOCALIZACION es menor de 6");
+				throw new EmsInvalidNumberOfDataException(
+						"El número de datos para LOCALIZACION es menor de 6" );
 			}
 			PosicionPersona pp = this.crearPosicionPersona(datos);
 			this.localizacion.addLocalizacion(pp);
@@ -165,18 +170,6 @@ public class ContactosCovid {
 	private String[] dividirLineaData(String data) {
         return data.split(";");
 	}
-
-	/*private Persona crearPersona(String[] data) {
-	    Persona persona = new Persona();
-		persona.setDocumento(data[0]);
-		persona.setNombre(data[1]);
-		persona.setApellidos(data[2]);
-		persona.setEmail(data[3]);
-		persona.setDireccion(data[4]);
-		persona.setCp(data[5]);
-		persona.setFechaNacimiento(parsearFecha(data[6]));
-		return persona;
-	}*/
 
 	private Persona crearPersona(String[] datos) {
 		return new Persona(datos[0], datos[1], datos[2], datos[3], datos[4], parsearFecha(datos[6]));
