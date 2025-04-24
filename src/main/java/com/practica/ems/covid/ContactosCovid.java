@@ -187,7 +187,7 @@ public class ContactosCovid {
 	}
 	
 	private FechaHora parsearFecha(String fecha) {
-	    return parsearFecha(fecha, "00:00");
+	    return parsearFecha(fecha, "");
 	}
 
 	private FechaHora parsearFecha(String fecha, String hora) {
